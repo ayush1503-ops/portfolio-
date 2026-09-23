@@ -1,194 +1,222 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, Copy, Check } from 'lucide-react';
-import { PERSONAL_INFO } from '../../data/portfolioData';
+import { motion } from 'motion/react';
+import { CheckCircle2, Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
+import { AYUSH_INFO } from '../../data/ayushData';
 
 export const ContactSection: React.FC = () => {
-  const [copied, setCopied] = useState(false);
-  const [formState, setFormState] = useState({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: '',
     message: ''
   });
-  const [sent, setSent] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText(PERSONAL_INFO.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2200);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formState.name || !formState.email || !formState.message) return;
-    setSent(true);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setSubmitted(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setSubmitted(false), 5000);
+    }, 800);
   };
 
   return (
-    <section id="contact" className="relative py-28 sm:py-36 px-6 sm:px-10 lg:px-12 max-w-7xl mx-auto w-full border-t border-white/[0.08]">
-      {/* Top Ledger */}
-      <div className="border-b border-white/[0.08] pb-4 mb-16 text-xs font-mono text-neutral-500 uppercase tracking-widest flex items-center justify-between">
-        <span>04 // INITIATE CONTACT</span>
-        <span>DELHI, INDIA</span>
-      </div>
+    <section id="contact" className="relative w-full py-20 md:py-32 px-4 md:px-6">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
+        {/* Left Info Column */}
+        <div className="w-full lg:w-1/2 flex flex-col justify-center">
+          <span className="text-[10px] font-mono text-gray-500 tracking-[0.3em] uppercase mb-4">
+            / GET IN TOUCH
+          </span>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-3xl min-[375px]:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 tracking-tighter leading-tight"
+          >
+            Let's Build Something{' '}
+            <span className="text-gradient">Exceptional</span>
+          </motion.h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start">
-        {/* Left Column: Direct Editorial Statement */}
-        <div className="lg:col-span-7 space-y-10">
-          <div>
-            <h2 className="font-display font-extrabold text-5xl sm:text-7xl lg:text-8xl text-white tracking-tight leading-[0.92] mb-8 select-none">
-              LET’S BUILD<br />
-              SOMETHING<br />
-              PROPER.
-            </h2>
-            <p className="text-base sm:text-lg text-neutral-400 font-normal leading-relaxed max-w-lg">
-              I'm open for select contracts, bespoke website builds, and engineering roles.
-              If you value clean code and direct communication, send me an email.
-            </p>
-          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-lg md:text-xl text-gray-300 font-light leading-relaxed max-w-lg mb-8"
+          >
+            Available for custom full-stack web builds, luxury e-commerce platforms, interactive 3D web applications, and creative video collaborations.
+          </motion.p>
 
-          {/* Direct Communication Channels */}
-          <div className="space-y-4 pt-4 border-t border-white/[0.08]">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-neutral-950 border border-white/10 hover:border-white/25 transition-colors">
+          {/* Contact Details List */}
+          <div className="flex flex-col gap-4 mb-8">
+            <a
+              href={`mailto:${AYUSH_INFO.email}`}
+              className="flex items-center gap-4 text-gray-300 hover:text-white group transition-colors"
+            >
+              <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.03] group-hover:border-[#0047ff] group-hover:bg-[#0047ff]/10 transition-colors">
+                <Mail className="w-4 h-4 text-[#0047ff]" />
+              </div>
               <div>
-                <span className="text-[11px] font-mono text-neutral-500 uppercase block">DIRECT EMAIL</span>
-                <a
-                  href={`mailto:${PERSONAL_INFO.email}`}
-                  className="font-sans text-base font-medium text-white hover:text-neutral-300 transition-colors"
-                >
-                  {PERSONAL_INFO.email}
-                </a>
+                <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Email Directly</div>
+                <div className="text-sm font-medium">{AYUSH_INFO.email}</div>
               </div>
-              <button
-                onClick={copyEmail}
-                className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-neutral-400 hover:text-white border border-white/10 hover:border-white/25 transition-colors cursor-pointer"
-              >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copied ? 'COPIED TO CLIPBOARD' : 'COPY'}</span>
-              </button>
+            </a>
+
+            <a
+              href={`tel:${AYUSH_INFO.phone}`}
+              className="flex items-center gap-4 text-gray-300 hover:text-white group transition-colors"
+            >
+              <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.03] group-hover:border-[#0047ff] group-hover:bg-[#0047ff]/10 transition-colors">
+                <Phone className="w-4 h-4 text-[#0047ff]" />
+              </div>
+              <div>
+                <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Call / WhatsApp</div>
+                <div className="text-sm font-medium">{AYUSH_INFO.phone}</div>
+              </div>
+            </a>
+
+            <div className="flex items-center gap-4 text-gray-300">
+              <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.03]">
+                <MapPin className="w-4 h-4 text-gray-400" />
+              </div>
+              <div>
+                <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Location</div>
+                <div className="text-sm font-medium">{AYUSH_INFO.location}</div>
+              </div>
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
-              <a
-                href={PERSONAL_INFO.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3.5 border border-white/10 hover:border-white/30 transition-colors flex items-center justify-between group"
-              >
-                <span className="text-neutral-300 group-hover:text-white">GITHUB</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-neutral-600 group-hover:text-white transition-colors" />
-              </a>
-
-              <a
-                href={PERSONAL_INFO.fiverr}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3.5 border border-white/10 hover:border-white/30 transition-colors flex items-center justify-between group"
-              >
-                <span className="text-neutral-300 group-hover:text-white">FIVERR</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-neutral-600 group-hover:text-white transition-colors" />
-              </a>
-
-              <a
-                href={PERSONAL_INFO.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3.5 border border-white/10 hover:border-white/30 transition-colors flex items-center justify-between group"
-              >
-                <span className="text-neutral-300 group-hover:text-white">LINKEDIN</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-neutral-600 group-hover:text-white transition-colors" />
-              </a>
-            </div>
+          {/* Quick Platform Link */}
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={AYUSH_INFO.fiverr}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-xs font-semibold hover:bg-emerald-500/20 transition-colors"
+            >
+              <span>Fiverr 5.0★ Seller Profile</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
           </div>
         </div>
 
-        {/* Right Column: Clean, Unadorned Note Box */}
-        <div className="lg:col-span-5">
-          <div className="border border-white/15 p-6 sm:p-8 bg-neutral-950">
-            <div className="border-b border-white/10 pb-4 mb-6">
-              <span className="text-xs font-mono text-neutral-400 uppercase tracking-widest block">
-                SEND A NOTE
-              </span>
-              <p className="text-xs text-neutral-500 mt-1">
-                Typical reply turnaround is under 6 hours.
-              </p>
+        {/* Right Form Card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="w-full lg:w-1/2"
+        >
+          <form
+            onSubmit={handleSubmit}
+            className="glass p-6 md:p-12 rounded-[2rem] flex flex-col gap-5 md:gap-6 relative overflow-hidden group w-full"
+          >
+            {/* Ambient Electric Blue Radial Spot */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#0047ff] rounded-full blur-[100px] opacity-15 pointer-events-none group-hover:opacity-25 transition-opacity duration-700" />
+
+            {/* Input Row: Name & Email */}
+            <div className="relative z-10 flex flex-col md:flex-row gap-6">
+              <div className="flex flex-col gap-2 w-full">
+                <label htmlFor="name" className="text-xs font-mono text-gray-400 uppercase tracking-widest pl-2">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="e.g. Alex Miller"
+                  className="w-full text-base bg-white/5 border border-white/10 rounded-full px-5 py-3.5 text-white outline-none focus:bg-white/10 focus:border-[#0047ff] transition-all duration-300"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2 w-full">
+                <label htmlFor="email" className="text-xs font-mono text-gray-400 uppercase tracking-widest pl-2">
+                  Your Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="alex@example.com"
+                  className="w-full text-base bg-white/5 border border-white/10 rounded-full px-5 py-3.5 text-white outline-none focus:bg-white/10 focus:border-[#0047ff] transition-all duration-300"
+                />
+              </div>
             </div>
 
-            {sent ? (
-              <div className="py-10 text-center space-y-4">
-                <span className="text-xs font-mono text-neutral-400 uppercase tracking-widest block">
-                  NOTE RECEIVED
-                </span>
-                <h4 className="font-display text-2xl text-white font-bold">
-                  Thanks, {formState.name}.
-                </h4>
-                <p className="text-xs text-neutral-400 leading-relaxed">
-                  I will write back to you at{' '}
-                  <span className="text-white font-mono">{formState.email}</span> shortly.
-                </p>
-                <button
-                  onClick={() => {
-                    setSent(false);
-                    setFormState({ name: '', email: '', message: '' });
-                  }}
-                  className="text-xs font-mono text-neutral-500 hover:text-white underline cursor-pointer pt-2 block mx-auto"
-                >
-                  Send another note
-                </button>
+            {/* Subject Field */}
+            <div className="relative z-10 flex flex-col gap-2">
+              <label htmlFor="subject" className="text-xs font-mono text-gray-400 uppercase tracking-widest pl-2">
+                Project Type
+              </label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                required
+                value={formData.subject}
+                onChange={handleChange}
+                placeholder="e.g. Web App / E-Commerce / Video Portfolio"
+                className="w-full text-base bg-white/5 border border-white/10 rounded-full px-5 py-3.5 text-white outline-none focus:bg-white/10 focus:border-[#0047ff] transition-all duration-300"
+              />
+            </div>
+
+            {/* Message Area */}
+            <div className="relative z-10 flex flex-col gap-2">
+              <label htmlFor="message" className="text-xs font-mono text-gray-400 uppercase tracking-widest pl-2">
+                Message Details
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={4}
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Describe your vision, timeline, goals, or requirements..."
+                className="w-full text-base bg-white/5 border border-white/10 rounded-3xl px-5 py-3.5 text-white outline-none focus:bg-white/10 focus:border-[#0047ff] transition-all duration-300 resize-none"
+              />
+            </div>
+
+            {/* Success notification banner */}
+            {submitted && (
+              <div className="relative z-10 flex items-center gap-2 text-emerald-400 text-sm bg-emerald-500/10 border border-emerald-500/20 px-4 py-3 rounded-full">
+                <CheckCircle2 className="w-4 h-4 shrink-0" />
+                <span>Message received! I'll get back to you within 24 hours.</span>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-[11px] font-mono text-neutral-400 uppercase tracking-wider mb-1.5">
-                    NAME
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Your name"
-                    value={formState.name}
-                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-neutral-900 border border-white/10 text-white placeholder-neutral-600 text-xs font-sans focus:outline-none focus:border-white/40 transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-mono text-neutral-400 uppercase tracking-wider mb-1.5">
-                    EMAIL
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="your@email.com"
-                    value={formState.email}
-                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-neutral-900 border border-white/10 text-white placeholder-neutral-600 text-xs font-sans focus:outline-none focus:border-white/40 transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-mono text-neutral-400 uppercase tracking-wider mb-1.5">
-                    MESSAGE
-                  </label>
-                  <textarea
-                    required
-                    rows={4}
-                    placeholder="Tell me about what you are building..."
-                    value={formState.message}
-                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-neutral-900 border border-white/10 text-white placeholder-neutral-600 text-xs font-sans focus:outline-none focus:border-white/40 transition-colors resize-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-3 px-4 text-xs font-mono tracking-widest uppercase text-black bg-white hover:bg-neutral-200 transition-colors font-semibold cursor-pointer"
-                >
-                  TRANSMIT MESSAGE
-                </button>
-              </form>
             )}
-          </div>
-        </div>
+
+            {/* Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="relative z-10 mt-2 md:mt-4 px-8 py-4 bg-white text-black font-semibold rounded-full overflow-hidden group/btn hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_40px_rgba(255,255,255,0.35)] disabled:opacity-50 w-full md:w-auto self-start cursor-pointer"
+            >
+              <span className="relative z-20">
+                {loading ? 'Sending Message...' : "Send Inquiry"}
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-white transform scale-x-0 origin-left group-hover/btn:scale-x-100 transition-transform duration-500 ease-out" />
+            </button>
+          </form>
+        </motion.div>
       </div>
     </section>
   );

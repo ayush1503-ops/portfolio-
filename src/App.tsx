@@ -1,61 +1,60 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import Lenis from 'lenis';
 import { Navbar } from './components/layout/Navbar';
 import { HeroSection } from './components/sections/HeroSection';
 import { ProjectsSection } from './components/sections/ProjectsSection';
-import { AboutSection } from './components/sections/AboutSection';
+import { ServicesSection } from './components/sections/ServicesSection';
 import { SkillsSection } from './components/sections/SkillsSection';
+import { JourneySection } from './components/sections/JourneySection';
 import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/layout/Footer';
-import { ProjectModal } from './components/modals/ProjectModal';
-import { ResumeModal } from './components/modals/ResumeModal';
-import { Project } from './types/portfolio';
 
-export default function App() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isResumeOpen, setIsResumeOpen] = useState(false);
+export const App: React.FC = () => {
+  useEffect(() => {
+    // Initialize Lenis buttery-smooth physics-based scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    const rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-[#e4e4e7] font-sans selection:bg-white/20 selection:text-white antialiased relative">
-      {/* Top Editorial Minimal Navigation */}
-      <Navbar onOpenResume={() => setIsResumeOpen(true)} />
+    <div className="relative min-h-screen bg-[#050505] text-[#fafafa] selection:bg-[#0047ff]/40 selection:text-white">
+      {/* Global Grain/Noise Overlay */}
+      <div className="noise" />
 
-      {/* Main Flow */}
-      <main>
-        {/* Magazine Editorial Hero with Physical 3D Studio Camera Lens */}
+      {/* Navigation */}
+      <Navbar />
+
+      {/* Main Content Sections */}
+      <main className="relative z-10 w-full overflow-hidden">
         <HeroSection />
-
-        {/* Selected Works - The Core Focal Centerpiece (Every project has an individual editorial spread) */}
-        <ProjectsSection onSelectProject={(project) => setSelectedProject(project)} />
-
-        {/* Personal & Authentic About (No photos, no cards, pure typography & technical details) */}
-        <AboutSection onOpenResume={() => setIsResumeOpen(true)} />
-
-        {/* Large Typographic Stack List (No generic cards or pills) */}
+        <ProjectsSection />
+        <ServicesSection />
         <SkillsSection />
-
-        {/* Direct, Honest Contact */}
+        <JourneySection />
         <ContactSection />
       </main>
 
-      {/* Quiet, Minimalist Studio Footer */}
+      {/* Footer */}
       <Footer />
-
-      {/* Case Study Detail Modal */}
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
-
-      {/* Resume Modal */}
-      <ResumeModal
-        isOpen={isResumeOpen}
-        onClose={() => setIsResumeOpen(false)}
-      />
     </div>
   );
-}
+};
+
+export default App;

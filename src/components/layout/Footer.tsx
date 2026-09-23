@@ -1,72 +1,98 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowUp } from 'lucide-react';
+import React from 'react';
+import { ArrowUp, Mail, Phone } from 'lucide-react';
+import { AYUSH_INFO } from '../../data/ayushData';
 
 export const Footer: React.FC = () => {
-  const [istTime, setIstTime] = useState<string>('');
-
-  useEffect(() => {
-    const tick = () => {
-      const now = new Date();
-      const options: Intl.DateTimeFormatOptions = {
-        timeZone: 'Asia/Kolkata',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      };
-      setIstTime(new Intl.DateTimeFormat('en-GB', options).format(now));
-    };
-
-    tick();
-    const timer = setInterval(tick, 1000);
-    return () => clearInterval(timer);
-  }, []);
+  const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <footer className="border-t border-white/[0.08] bg-[#09090b] py-14 px-6 sm:px-10 lg:px-12 max-w-7xl mx-auto w-full text-xs font-mono text-neutral-500">
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-white/[0.06]">
-        {/* Brand */}
-        <div className="space-y-1">
-          <span className="font-display font-bold text-lg text-white tracking-tight block">
-            AYUSH THAKUR
-          </span>
-          <p className="text-neutral-400 font-sans text-xs">
-            Full-Stack Developer · Delhi, India
-          </p>
-        </div>
+    <footer className="relative w-full bg-[#050505] text-white pt-24 pb-8 overflow-hidden flex flex-col items-center justify-between min-h-[50vh] border-t border-white/5">
+      {/* Ambient Blue Bottom Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_center,rgba(0,71,255,0.06),transparent_60%)] pointer-events-none" />
 
-        {/* Real-time Vitals */}
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2 text-neutral-400">
-            <span className="w-1.5 h-1.5 bg-neutral-300" />
-            <span>DELHI, IN:</span>
-            <span className="text-white font-mono">{istTime || '19:35:00'} IST</span>
-          </div>
-          <span className="text-neutral-600 hidden sm:inline">/</span>
-          <span className="text-neutral-500 hidden sm:inline">UTC+05:30</span>
-        </div>
+      {/* Craft Note */}
+      <div className="relative z-10 max-w-2xl text-center px-4 mb-12">
+        <p className="text-gray-400 font-light leading-relaxed text-sm md:text-base">
+          Crafted with care, engineered with clean, modular, and efficient code.
+          <br />
+          Thank you for exploring my work — let's build something exceptional together.
+        </p>
       </div>
 
-      {/* Bottom Sub-ledger */}
-      <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-neutral-500">
-        <div>
-          © {new Date().getFullYear()} AYUSH THAKUR.
+      {/* Navigation Quick Links */}
+      <div className="relative z-10 flex flex-wrap justify-center items-center gap-6 md:gap-10 mb-16 px-4">
+        {[
+          { name: 'Home', href: '#home' },
+          { name: 'Projects', href: '#projects' },
+          { name: 'Services', href: '#services' },
+          { name: 'Skills', href: '#skills' },
+          { name: 'Journey', href: '#journey' },
+          { name: 'Contact', href: '#contact' }
+        ].map((item) => (
+          <a
+            key={item.name}
+            href={item.href}
+            className="text-gray-400 hover:text-white text-xs uppercase tracking-widest font-mono transition-colors duration-300"
+          >
+            {item.name}
+          </a>
+        ))}
+      </div>
+
+      {/* Massive Brand Watermark */}
+      <div className="relative z-0 w-full overflow-hidden flex justify-center items-center pointer-events-none select-none my-6">
+        <span className="text-[20vw] font-black leading-none tracking-tighter text-[#101010] select-none">
+          AYUSH
+        </span>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="relative z-10 w-full max-w-7xl px-6 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4 mt-auto border-t border-white/5 pt-8">
+        <p className="text-gray-500 text-xs font-light text-center md:text-left">
+          © {currentYear}. All Rights Reserved By {AYUSH_INFO.name}
+        </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-gray-400">
+          <a
+            href={`mailto:${AYUSH_INFO.email}`}
+            className="flex items-center gap-1.5 hover:text-white transition-colors"
+          >
+            <Mail className="w-3.5 h-3.5 text-[#38bdf8]" />
+            <span>{AYUSH_INFO.email}</span>
+          </a>
+          <span className="text-white/20">•</span>
+          <a
+            href={`tel:${AYUSH_INFO.phone}`}
+            className="flex items-center gap-1.5 hover:text-white transition-colors"
+          >
+            <Phone className="w-3.5 h-3.5 text-[#38bdf8]" />
+            <span>{AYUSH_INFO.phone}</span>
+          </a>
         </div>
 
-        <div className="flex items-center gap-6">
-          <span className="text-neutral-600">
-            PERSONAL DIGITAL STUDIO
-          </span>
+        <div className="flex items-center gap-5">
+          {/* Fiverr */}
+          <a
+            href={AYUSH_INFO.fiverr}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Fiverr Seller Profile"
+            className="text-emerald-400 hover:text-emerald-300 text-[11px] font-mono font-bold tracking-wider px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 transition-colors"
+          >
+            5.0★ FIVERR SELLER
+          </a>
+
+          {/* Back to top button */}
           <button
             onClick={scrollToTop}
-            className="text-neutral-300 hover:text-white flex items-center gap-1 transition-colors cursor-pointer"
+            title="Back to Top"
+            className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all cursor-pointer"
           >
-            <span>TOP</span>
-            <ArrowUp className="w-3 h-3" />
+            <ArrowUp className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>

@@ -1,416 +1,288 @@
-import React from 'react';
-import { ExternalLink, Github, ArrowUpRight } from 'lucide-react';
-import { PROJECTS } from '../../data/portfolioData';
-import { Project } from '../../types/portfolio';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowUpRight, ExternalLink, Sparkles, LayoutGrid, SlidersHorizontal } from 'lucide-react';
+import { AYUSH_PROJECTS, ProjectItem } from '../../data/ayushData';
 
-interface ProjectsSectionProps {
-  onSelectProject: (project: Project) => void;
-}
+const categories = [
+  'All',
+  'Web & E-Commerce',
+  '3D & Interactive',
+  'AI & Vision',
+  'Creative Studio'
+] as const;
 
-export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProject }) => {
-  // Grab the 5 core real projects
-  const pasha = PROJECTS.find(p => p.id === 'the-pasha-atelier') || PROJECTS[0];
-  const games = PROJECTS.find(p => p.id === 'games-studio') || PROJECTS[1];
-  const onion = PROJECTS.find(p => p.id === 'onion-grader-ai') || PROJECTS[2];
-  const pulse = PROJECTS.find(p => p.id === 'pulse-commerce') || PROJECTS[3];
-  const netflix = PROJECTS.find(p => p.id === 'netflix-data-analysis') || PROJECTS[5];
+type Category = (typeof categories)[number];
 
+const ProjectCard: React.FC<{ project: ProjectItem }> = ({ project }) => {
   return (
-    <section id="work" className="relative py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-7xl mx-auto w-full border-t border-white/[0.08]">
-      {/* Section Introduction */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-24 pb-6 border-b border-white/[0.08] gap-6">
-        <div>
-          <span className="text-xs font-mono text-neutral-500 tracking-widest uppercase block mb-2">
-            INDEX // SELECTED ARCHIVE
-          </span>
-          <h2 className="font-display font-extrabold text-4xl sm:text-6xl text-white tracking-tight leading-none">
-            FEATURED WORK.
-          </h2>
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4 }}
+      className="group relative flex flex-col rounded-3xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-xl overflow-hidden hover:border-white/20 transition-all duration-500 shadow-2xl"
+    >
+      {/* 16:10 Thumbnail */}
+      <div className="relative aspect-[16/10] overflow-hidden bg-black/60">
+        <img
+          src={project.img}
+          alt={project.title}
+          className="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/30 to-transparent" />
+
+        {/* Hover Sheen */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+          <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12" />
         </div>
-        <div className="text-xs font-mono text-neutral-400 max-w-xs text-left sm:text-right">
-          Production applications, e-commerce flagships, and spatial tools. Real deployments, real code.
+
+        {/* Top Badges */}
+        <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+          <span className="px-3 py-1 rounded-full text-[10px] uppercase tracking-wider text-white font-mono bg-black/70 border border-white/15 backdrop-blur-md">
+            {project.tag}
+          </span>
+          {project.metrics && (
+            <span className="px-2.5 py-1 rounded-full text-[10px] font-mono text-emerald-300 bg-emerald-950/60 border border-emerald-500/30 backdrop-blur-md">
+              {project.metrics}
+            </span>
+          )}
         </div>
       </div>
 
-      <div className="space-y-36 sm:space-y-44">
-        {/* ========================================================
-            PAGE 01: THE PASHA ATELIER (Full-bleed Hero Spread)
-           ======================================================== */}
-        <article className="space-y-8">
-          {/* Top Identifier */}
-          <div className="flex items-baseline justify-between border-b border-white/[0.08] pb-4 text-xs font-mono">
-            <span className="text-3xl font-display font-extrabold text-white">01</span>
-            <span className="tracking-widest uppercase text-neutral-400">
-              E-COMMERCE / DIGITAL ATELIER
-            </span>
-            <span className="text-neutral-500 hidden sm:inline">VERCEL // 2026</span>
+      {/* Card Content */}
+      <div className="p-6 md:p-7 flex flex-col justify-between flex-1">
+        <div>
+          <div className="flex items-start justify-between gap-4 mb-3">
+            <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-[#38bdf8] transition-colors">
+              {project.title}
+            </h3>
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${project.title}`}
+              className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.04] text-white/70 group-hover:bg-white group-hover:text-black transition-all duration-300 shrink-0"
+            >
+              <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
           </div>
 
-          {/* Huge Full Project Image */}
-          <div
-            onClick={() => onSelectProject(pasha)}
-            className="group cursor-pointer relative overflow-hidden bg-neutral-950 border border-white/10 hover:border-white/30 transition-all duration-500"
-          >
-            <div className="aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden">
-              <img
-                src={pasha.imageUrl}
-                alt={pasha.title}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover object-top grayscale-[10%] group-hover:grayscale-0 group-hover:scale-[1.01] transition-all duration-700 ease-out"
-              />
-            </div>
-            <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 bg-black/85 backdrop-blur-sm px-3 py-1.5 border border-white/15 text-xs font-mono text-neutral-300">
-              CLICK TO VIEW ARCHITECTURAL CASE STUDY
-            </div>
-          </div>
+          <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light">
+            {project.desc}
+          </p>
+        </div>
 
-          {/* Underneath: Asymmetric Metadata Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
-            <div className="lg:col-span-4 space-y-4">
-              <h3
-                onClick={() => onSelectProject(pasha)}
-                className="font-display font-extrabold text-3xl sm:text-4xl text-white hover:text-neutral-300 transition-colors cursor-pointer tracking-tight"
+        <div>
+          <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5 mb-5">
+            {project.techs.map((tech) => (
+              <span
+                key={tech}
+                className="px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-gray-300 text-[11px] font-mono"
               >
-                {pasha.title}
-              </h3>
-              <div className="space-y-1 text-xs font-mono text-neutral-400">
-                <div><span className="text-neutral-600">ROLE:</span> FULL-STACK ARCHITECT</div>
-                <div><span className="text-neutral-600">STACK:</span> NEXT.JS / REACT / TAILWIND CSS</div>
-                <div><span className="text-neutral-600">YEAR:</span> 2026</div>
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-2.5 px-4 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white text-white hover:text-black text-xs font-semibold tracking-wide flex items-center justify-center gap-2 transition-all duration-300"
+          >
+            <span>Launch Live Experience</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export const ProjectsSection: React.FC = () => {
+  const [activeCategory, setActiveCategory] = useState<Category>('All');
+  const [viewMode, setViewMode] = useState<'grid' | 'marquee'>('grid');
+
+  const filteredProjects =
+    activeCategory === 'All'
+      ? AYUSH_PROJECTS
+      : AYUSH_PROJECTS.filter((p) => p.category === activeCategory);
+
+  const featuredProject = AYUSH_PROJECTS[0]; // The Pasha Atelier
+
+  const marqueeRow1 = [...filteredProjects, ...filteredProjects];
+  const marqueeRow2 = [...[...filteredProjects].reverse(), ...[...filteredProjects].reverse()];
+
+  return (
+    <section id="projects" className="relative w-full py-24 md:py-32 px-4 md:px-8 bg-[#050505] overflow-hidden">
+      {/* Background Ambient Spotlights */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#0047ff]/6 blur-[180px] rounded-full" />
+        <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#38bdf8]/5 blur-[180px] rounded-full" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[11px] font-mono text-[#38bdf8] uppercase tracking-wider mb-4">
+              <Sparkles className="w-3 h-3" />
+              Verified Portfolio
+            </div>
+            <h2 className="text-3xl min-[375px]:text-4xl md:text-6xl font-black text-white tracking-tighter">
+              Featured Projects
+            </h2>
+          </div>
+          <p className="text-sm md:text-base text-gray-400 font-light max-w-md leading-relaxed">
+            Real production applications, bespoke digital couture, interactive 3D WebGL experiences, and computer vision systems with live deployments.
+          </p>
+        </div>
+
+        {/* Flagship Highlight Banner */}
+        <div className="mb-14 rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.04] via-black to-white/[0.01] p-6 md:p-8 lg:p-10 backdrop-blur-2xl shadow-2xl relative overflow-hidden group">
+          <div className="absolute -top-32 -right-32 w-80 h-80 bg-[#0047ff]/15 rounded-full blur-[100px] pointer-events-none" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Visual Preview */}
+            <div className="lg:col-span-7 rounded-2xl overflow-hidden aspect-[16/10] border border-white/10 relative group-hover:border-white/20 transition-all">
+              <img
+                src={featuredProject.img}
+                alt={featuredProject.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4">
+                <span className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-mono">
+                  ● Flagship Live Project
+                </span>
               </div>
             </div>
 
-            <div className="lg:col-span-5 space-y-4 text-sm text-neutral-300 leading-relaxed font-normal">
-              <p>
-                An editorial digital atelier engineered for an exclusive tailoring house. Built with fluid
-                transitions, bespoke catalog displays, client consultation scheduling, and micro-interactions
-                optimized for luxury brand conversion. Scored 99+ on Lighthouse.
-              </p>
-              <div className="flex flex-wrap gap-2 text-[11px] font-mono text-neutral-400">
-                {pasha.technologies.map(t => (
-                  <span key={t} className="px-2 py-0.5 border border-white/[0.08]">{t}</span>
+            {/* Info */}
+            <div className="lg:col-span-5 flex flex-col justify-between">
+              <div>
+                <span className="text-xs font-mono text-[#38bdf8] uppercase tracking-widest mb-2 block">
+                  {featuredProject.tag}
+                </span>
+                <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight mb-4">
+                  {featuredProject.title}
+                </h3>
+                <p className="text-gray-300 text-sm md:text-base font-light leading-relaxed mb-6">
+                  {featuredProject.desc}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {featuredProject.techs.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-white/80 text-xs font-mono"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <a
+                  href={featuredProject.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 rounded-full bg-white text-black font-semibold text-sm hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center gap-2"
+                >
+                  <span>Explore Live Production</span>
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Filter Controls & View Switcher */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 pb-4 border-b border-white/10">
+          {/* Category Tabs */}
+          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-all cursor-pointer ${
+                  activeCategory === cat
+                    ? 'bg-white text-black font-semibold shadow-md'
+                    : 'bg-white/[0.04] text-gray-400 hover:text-white hover:bg-white/10 border border-white/5'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* View Mode Switcher */}
+          <div className="flex items-center gap-2 self-end sm:self-auto">
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`p-2 rounded-lg border transition-colors cursor-pointer ${
+                viewMode === 'grid'
+                  ? 'border-white/40 bg-white/10 text-white'
+                  : 'border-white/5 text-gray-500 hover:text-gray-300'
+              }`}
+              title="Grid View"
+            >
+              <LayoutGrid className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setViewMode('marquee')}
+              className={`p-2 rounded-lg border transition-colors cursor-pointer ${
+                viewMode === 'marquee'
+                  ? 'border-white/40 bg-white/10 text-white'
+                  : 'border-white/5 text-gray-500 hover:text-gray-300'
+              }`}
+              title="Continuous Marquee View"
+            >
+              <SlidersHorizontal className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Projects View */}
+        {viewMode === 'grid' ? (
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          >
+            <AnimatePresence>
+              {filteredProjects.map((p) => (
+                <ProjectCard key={p.id} project={p} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        ) : (
+          <div className="flex flex-col gap-6 overflow-hidden py-4">
+            {/* Top Marquee */}
+            <div className="overflow-hidden">
+              <div className="animate-marquee-left flex gap-6 w-max">
+                {marqueeRow1.map((p, i) => (
+                  <div key={`m1-${p.id}-${i}`} className="w-[360px] shrink-0">
+                    <ProjectCard project={p} />
+                  </div>
                 ))}
               </div>
             </div>
 
-            <div className="lg:col-span-3 flex flex-col justify-between items-start lg:items-end gap-4 text-xs font-mono">
-              <a
-                href={pasha.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-white hover:text-neutral-300 border-b border-white pb-0.5 transition-colors"
-              >
-                <span>OPEN LIVE SITE</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-              <button
-                onClick={() => onSelectProject(pasha)}
-                className="text-neutral-500 hover:text-white transition-colors cursor-pointer"
-              >
-                [ READ FULL NOTES ]
-              </button>
-            </div>
-          </div>
-        </article>
-
-        {/* ========================================================
-            PAGE 02: NEXSTUDIO GAMES (Asymmetric Split Magazine Layout)
-           ======================================================== */}
-        <article className="space-y-6">
-          <div className="flex items-baseline justify-between border-b border-white/[0.08] pb-4 text-xs font-mono">
-            <span className="text-3xl font-display font-extrabold text-white">02</span>
-            <span className="tracking-widest uppercase text-neutral-400">
-              INTERACTIVE 3D / WEBGL PRODUCTION
-            </span>
-            <span className="text-neutral-500 hidden sm:inline">THREE.JS // 2026</span>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            {/* Left: Deep Story & Specs */}
-            <div className="lg:col-span-5 space-y-6 order-2 lg:order-1">
-              <div>
-                <h3
-                  onClick={() => onSelectProject(games)}
-                  className="font-display font-extrabold text-3xl sm:text-4xl text-white hover:text-neutral-300 transition-colors cursor-pointer tracking-tight"
-                >
-                  {games.title}
-                </h3>
-                <p className="text-xs font-mono text-neutral-500 uppercase tracking-widest mt-1">
-                  {games.subtitle}
-                </p>
-              </div>
-
-              <p className="text-sm text-neutral-300 leading-relaxed font-normal">
-                An avant-garde gaming studio showcase featuring real-time WebGL viewports, custom lighting
-                cues, and high-performance dark architecture running smoothly at 60 FPS across both mobile
-                and desktop.
-              </p>
-
-              <div className="border-t border-b border-white/[0.08] py-3 space-y-1.5 text-xs font-mono text-neutral-400">
-                <div className="flex justify-between">
-                  <span className="text-neutral-600">ROLE</span>
-                  <span className="text-neutral-200">Lead Frontend & Spatial</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-neutral-600">ENGINE</span>
-                  <span className="text-neutral-200">Three.js / WebGL / React</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-neutral-600">PERFORMANCE</span>
-                  <span className="text-neutral-200">60 FPS Stable Rendering</span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-6 text-xs font-mono">
-                <a
-                  href={games.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-white hover:text-neutral-300 border-b border-white pb-0.5 transition-colors"
-                >
-                  <span>LIVE SHOWCASE</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-                <button
-                  onClick={() => onSelectProject(games)}
-                  className="text-neutral-500 hover:text-white cursor-pointer"
-                >
-                  CASE STUDY
-                </button>
-              </div>
-            </div>
-
-            {/* Right: Offset Image */}
-            <div
-              onClick={() => onSelectProject(games)}
-              className="lg:col-span-7 order-1 lg:order-2 group cursor-pointer overflow-hidden border border-white/10 hover:border-white/30 transition-all bg-neutral-950 aspect-[16/10]"
-            >
-              <img
-                src={games.imageUrl}
-                alt={games.title}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 group-hover:scale-[1.02] transition-all duration-700 ease-out"
-              />
-            </div>
-          </div>
-        </article>
-
-        {/* ========================================================
-            PAGE 03: ONION GRADER AI (Industrial Telemetry Spread)
-           ======================================================== */}
-        <article className="space-y-8">
-          <div className="flex items-baseline justify-between border-b border-white/[0.08] pb-4 text-xs font-mono">
-            <span className="text-3xl font-display font-extrabold text-white">03</span>
-            <span className="tracking-widest uppercase text-neutral-400">
-              AI COMPUTER VISION & TELEMETRY
-            </span>
-            <span className="text-neutral-500 hidden sm:inline">PYTHON + REACT // 2026</span>
-          </div>
-
-          <div>
-            <h3
-              onClick={() => onSelectProject(onion)}
-              className="font-display font-extrabold text-3xl sm:text-4xl text-white hover:text-neutral-300 transition-colors cursor-pointer tracking-tight"
-            >
-              {onion.title}
-            </h3>
-            <p className="text-xs font-mono text-neutral-500 uppercase tracking-widest mt-1">
-              AUTOMATED AGRICULTURAL INSPECTION & QUALITY SORTING
-            </p>
-          </div>
-
-          {/* Panoramic Widescreen Image */}
-          <div
-            onClick={() => onSelectProject(onion)}
-            className="group cursor-pointer overflow-hidden border border-white/10 hover:border-white/30 transition-all bg-neutral-950 aspect-[21/9]"
-          >
-            <img
-              src={onion.imageUrl}
-              alt={onion.title}
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 group-hover:scale-[1.01] transition-all duration-700 ease-out"
-            />
-          </div>
-
-          {/* 3-Column Technical Data Breakdown */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 text-xs font-mono border-t border-white/[0.08] pt-6">
-            <div className="space-y-2">
-              <span className="text-neutral-500 uppercase block tracking-wider">[01] PROBLEM & PIPELINE</span>
-              <p className="text-neutral-300 font-sans leading-relaxed text-xs">
-                Bridging optical sorting cameras with a real-time web telemetry dashboard.
-                Defect classification heuristics sorting crop batches into grade tiers.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <span className="text-neutral-500 uppercase block tracking-wider">[02] STACK & LATENCY</span>
-              <p className="text-neutral-300 font-sans leading-relaxed text-xs">
-                Python computer vision pipeline paired with PostgreSQL and React dashboard.
-                Sub-200ms inference processing cycle with 94% defect precision.
-              </p>
-            </div>
-
-            <div className="space-y-2 flex flex-col justify-between">
-              <div>
-                <span className="text-neutral-500 uppercase block tracking-wider">[03] SYSTEM ACCESS</span>
-                <span className="text-neutral-400 block text-xs mt-1">Operator interface active</span>
-              </div>
-              <div className="flex items-center gap-4 pt-2">
-                <a
-                  href={onion.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-neutral-300 border-b border-white pb-0.5 inline-flex items-center gap-1"
-                >
-                  <span>LIVE SYSTEM</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-                <button
-                  onClick={() => onSelectProject(onion)}
-                  className="text-neutral-500 hover:text-white cursor-pointer"
-                >
-                  DETAILS
-                </button>
+            {/* Bottom Marquee */}
+            <div className="overflow-hidden">
+              <div className="animate-marquee-right flex gap-6 w-max">
+                {marqueeRow2.map((p, i) => (
+                  <div key={`m2-${p.id}-${i}`} className="w-[360px] shrink-0">
+                    <ProjectCard project={p} />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </article>
-
-        {/* ========================================================
-            PAGE 04: PULSE COMMERCE STORE (Streetwear Review Spread)
-           ======================================================== */}
-        <article className="space-y-6">
-          <div className="flex items-baseline justify-between border-b border-white/[0.08] pb-4 text-xs font-mono">
-            <span className="text-3xl font-display font-extrabold text-white">04</span>
-            <span className="tracking-widest uppercase text-neutral-400">
-              FULL-STACK STREETWEAR COMMERCE
-            </span>
-            <span className="text-neutral-500 hidden sm:inline">FREELANCE CLIENTS // 2025</span>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            {/* Left: Product Grid Screenshot */}
-            <div
-              onClick={() => onSelectProject(pulse)}
-              className="lg:col-span-7 group cursor-pointer overflow-hidden border border-white/10 hover:border-white/30 transition-all bg-neutral-950 aspect-[16/10]"
-            >
-              <img
-                src={pulse.imageUrl}
-                alt={pulse.title}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 group-hover:scale-[1.02] transition-all duration-700 ease-out"
-              />
-            </div>
-
-            {/* Right: Editorial Production Notes */}
-            <div className="lg:col-span-5 space-y-6">
-              <div>
-                <h3
-                  onClick={() => onSelectProject(pulse)}
-                  className="font-display font-extrabold text-3xl sm:text-4xl text-white hover:text-neutral-300 transition-colors cursor-pointer tracking-tight"
-                >
-                  {pulse.title}
-                </h3>
-                <p className="text-xs font-mono text-neutral-500 uppercase tracking-widest mt-1">
-                  HIGH-CONVERSION APPAREL STOREFRONT
-                </p>
-              </div>
-
-              <p className="text-sm text-neutral-300 leading-relaxed font-normal">
-                Engineered for independent apparel labels requiring lean bundles, instant category filtering,
-                and persistent cart sessions without third-party plugin bloat. Packaged and delivered to
-                international clients on freelance platforms with 100% 5-star satisfaction.
-              </p>
-
-              <div className="space-y-2 text-xs font-mono border-t border-white/[0.08] pt-4 text-neutral-400">
-                <div><span className="text-neutral-600">ROLE:</span> FULL-STACK DEVELOPER</div>
-                <div><span className="text-neutral-600">STACK:</span> HTML5 / CSS3 / JAVASCRIPT / STORAGE</div>
-                <div><span className="text-neutral-600">DELIVERY:</span> 15+ FREELANCE DEPLOYMENTS</div>
-              </div>
-
-              <div className="flex items-center gap-6 text-xs font-mono pt-2">
-                <a
-                  href={pulse.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-white hover:text-neutral-300 border-b border-white pb-0.5 transition-colors"
-                >
-                  <span>LIVE STORE</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-                <button
-                  onClick={() => onSelectProject(pulse)}
-                  className="text-neutral-500 hover:text-white cursor-pointer"
-                >
-                  CASE STUDY
-                </button>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        {/* ========================================================
-            PAGE 05: NETFLIX CATALOG INTELLIGENCE (SQL Data Ledger)
-           ======================================================== */}
-        <article className="space-y-6">
-          <div className="flex items-baseline justify-between border-b border-white/[0.08] pb-4 text-xs font-mono">
-            <span className="text-3xl font-display font-extrabold text-white">05</span>
-            <span className="tracking-widest uppercase text-neutral-400">
-              SQL DATA MODELING & ANALYTICS
-            </span>
-            <span className="text-neutral-500 hidden sm:inline">POSTGRESQL + POWER BI // 2025</span>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-5 space-y-4">
-              <h3
-                onClick={() => onSelectProject(netflix)}
-                className="font-display font-extrabold text-3xl sm:text-4xl text-white hover:text-neutral-300 transition-colors cursor-pointer tracking-tight"
-              >
-                {netflix.title}
-              </h3>
-              <p className="text-xs font-mono text-neutral-500 uppercase tracking-widest">
-                CATALOG INTELLIGENCE ENGINE
-              </p>
-              <p className="text-sm text-neutral-300 leading-relaxed font-normal">
-                Structured and queried over 8,800 records using advanced PostgreSQL queries (CTEs, window
-                aggregations, multi-table joins). Synthesized findings into executive Power BI visual dashboards
-                highlighting international content growth.
-              </p>
-            </div>
-
-            {/* Engineering Terminal / Code Excerpt Box */}
-            <div className="lg:col-span-7 bg-neutral-950 border border-white/10 p-5 font-mono text-xs text-neutral-300 space-y-3">
-              <div className="flex items-center justify-between text-neutral-500 border-b border-white/[0.08] pb-2 text-[11px]">
-                <span>QUERY_CATALOG_WINDOW.SQL</span>
-                <span>POSTGRESQL // 8,800+ ROWS</span>
-              </div>
-              <pre className="text-neutral-400 overflow-x-auto text-[11px] leading-relaxed">
-{`WITH GenreFrequency AS (
-  SELECT unnest(string_to_array(listed_in, ', ')) AS genre,
-         release_year,
-         COUNT(*) as total_titles,
-         RANK() OVER (PARTITION BY release_year ORDER BY COUNT(*) DESC) as rank
-  FROM netflix_titles
-  WHERE release_year >= 2018
-  GROUP BY genre, release_year
-)
-SELECT genre, release_year, total_titles 
-FROM GenreFrequency 
-WHERE rank <= 3 ORDER BY release_year DESC, total_titles DESC;`}
-              </pre>
-              <div className="flex items-center justify-between pt-2 border-t border-white/[0.08] text-xs">
-                <span className="text-neutral-500">POWER BI DASHBOARD SYNTHESIS</span>
-                <button
-                  onClick={() => onSelectProject(netflix)}
-                  className="text-white hover:underline cursor-pointer"
-                >
-                  VIEW CASE STUDY →
-                </button>
-              </div>
-            </div>
-          </div>
-        </article>
+        )}
       </div>
     </section>
   );
