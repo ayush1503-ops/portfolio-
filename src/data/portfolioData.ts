@@ -15,7 +15,6 @@ export const PERSONAL_INFO = {
   email: 'ayusheditor1503@gmail.com',
   phone: '+91 95996 48246',
   location: 'Delhi, India',
-  fiverr: 'https://www.fiverr.com/sellers/ayushthaku_1503/edit',
   portraitImage: portraitImg,
   status: 'Open for Opportunities & High-Impact Contracts',
   stats: [
@@ -106,7 +105,7 @@ export const PROJECTS: Project[] = [
     year: '2025',
     description: 'A responsive clothing store built for high conversion rates with dynamic category filtering, cart state management, and optimized checkout flow.',
     longDescription: 'Created as a production-ready apparel marketplace template. Engineered with semantic HTML5, modern CSS Grid/Flexbox architecture, dynamic client-side filtering, and persistent cart state.',
-    technologies: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'State Management', 'Fiverr Deliverable'],
+    technologies: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'State Management', 'Web Production'],
     liveUrl: 'https://frontented-e-commerce-website-desig.vercel.app/',
     githubUrl: '',
     imageUrl: commerceImg,
@@ -114,7 +113,7 @@ export const PROJECTS: Project[] = [
       'Comprehensive product listing with instant category & price filtering',
       'Interactive sliding cart with persistent local storage',
       'Conversion-focused product detail pages with size selection',
-      'Delivered to international clients on freelance platforms'
+      'Delivered to international clients on freelance contracts'
     ],
     metrics: '100% 5-star ratings on freelance delivery',
     accentColor: '#f59e0b'
@@ -264,12 +263,12 @@ export const JOURNEY_MILESTONES: JourneyMilestone[] = [
   {
     year: '2026 — Present',
     title: 'Full-Stack Developer & Freelance Creator',
-    role: 'Bespoke Web Development & Freelance Delivery',
-    organization: 'Freelance & Independent Projects (Fiverr 5.0★)',
+    role: 'Bespoke Web Development & Independent Delivery',
+    organization: 'Independent Client Delivery & Contracts',
     description: 'Delivering end-to-end full-stack web applications, luxury e-commerce platforms, and interactive visual websites for creators and international businesses.',
     achievements: [
       'Designed and deployed The Pasha Atelier, NexStudio Games, and Onion Grader AI',
-      'Maintained 100% 5-star client ratings on Fiverr across web development and template deliverables'
+      'Maintained 100% 5-star client ratings across web development and template deliverables'
     ],
     technologies: ['React', 'Next.js', 'Tailwind CSS', 'Three.js', 'PostgreSQL']
   },

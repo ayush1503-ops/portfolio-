@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { CheckCircle2, Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
+import { CheckCircle2, Mail, Phone, MapPin } from 'lucide-react';
 import { AYUSH_INFO } from '../../data/ayushData';
 
 export const ContactSection: React.FC = () => {
@@ -60,7 +60,7 @@ export const ContactSection: React.FC = () => {
           </motion.p>
 
           {/* Contact Details List */}
-          <div className="flex flex-col gap-4 mb-8">
+          <div className="flex flex-col gap-4">
             <a
               href={`mailto:${AYUSH_INFO.email}`}
               className="flex items-center gap-4 text-gray-300 hover:text-white group transition-colors"
@@ -96,19 +96,6 @@ export const ContactSection: React.FC = () => {
                 <div className="text-sm font-medium">{AYUSH_INFO.location}</div>
               </div>
             </div>
-          </div>
-
-          {/* Quick Platform Link */}
-          <div className="flex flex-wrap gap-3">
-            <a
-              href={AYUSH_INFO.fiverr}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-xs font-semibold hover:bg-emerald-500/20 transition-colors"
-            >
-              <span>Fiverr 5.0★ Seller Profile</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
           </div>
         </div>
 

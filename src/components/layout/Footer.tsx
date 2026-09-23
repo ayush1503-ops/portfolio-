@@ -75,17 +75,6 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-5">
-          {/* Fiverr */}
-          <a
-            href={AYUSH_INFO.fiverr}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Fiverr Seller Profile"
-            className="text-emerald-400 hover:text-emerald-300 text-[11px] font-mono font-bold tracking-wider px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 transition-colors"
-          >
-            5.0★ FIVERR SELLER
-          </a>
-
           {/* Back to top button */}
           <button
             onClick={scrollToTop}

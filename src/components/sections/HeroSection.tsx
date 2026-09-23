@@ -215,7 +215,7 @@ export const HeroSection: React.FC = () => {
           I craft modern, scalable, and visually engaging digital experiences that feel different — engineering high-performance web applications, interactive 3D systems, and creative video platforms.
         </motion.p>
 
-        {/* Call to Actions & Verified Links */}
+        {/* Call to Actions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -234,15 +234,6 @@ export const HeroSection: React.FC = () => {
             className="px-8 py-3.5 bg-white/[0.05] hover:bg-white/10 text-white font-medium rounded-full border border-white/15 hover:border-white/40 transition-all duration-300 text-sm md:text-base cursor-pointer"
           >
             Get In Touch
-          </a>
-          <a
-            href={AYUSH_INFO.fiverr}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-sm font-semibold hover:bg-emerald-500/20 transition-all flex items-center gap-2"
-          >
-            <span>Fiverr 5.0★ Seller Profile</span>
-            <ArrowUpRight className="w-4 h-4" />
           </a>
         </motion.div>
 

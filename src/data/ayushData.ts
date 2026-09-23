@@ -77,22 +77,11 @@ export const AYUSH_PROJECTS: ProjectItem[] = [
     desc: 'High-retention post-production portfolio platform featuring dynamic video showreels, service calculators, and direct consultation booking.',
     techs: ['React', 'Tailwind CSS', 'Framer Motion', 'Video API'],
     metrics: 'Interactive Video Showcase'
-  },
-  {
-    id: 'fiverr-solutions',
-    title: 'Client Web Deliverables (Fiverr)',
-    url: 'https://www.fiverr.com/sellers/ayushthaku_1503/edit',
-    img: pashaImg,
-    tag: 'Freelance Delivery',
-    category: 'Web & E-Commerce',
-    desc: 'Engineered custom landing pages, responsive e-commerce storefronts, and full-stack solutions for international clients with 100% 5★ reviews.',
-    techs: ['React', 'Next.js', 'Tailwind', '100% 5★ Rating'],
-    metrics: '100% 5-Star Reviews'
   }
 ];
 
 export const AYUSH_PROJECTS_ROW1 = AYUSH_PROJECTS.slice(0, 3);
-export const AYUSH_PROJECTS_ROW2 = AYUSH_PROJECTS.slice(3, 6);
+export const AYUSH_PROJECTS_ROW2 = AYUSH_PROJECTS.slice(2, 5);
 
 export interface ServiceItem {
   id: string;
@@ -162,11 +151,11 @@ export const AYUSH_SERVICES: ServiceItem[] = [
   },
   {
     id: '08',
-    title: 'Freelance Client Delivery',
+    title: 'Bespoke Client Solutions',
     category: 'Core Engineering',
-    description: 'Delivering end-to-end bespoke solutions on Fiverr with verified 100% 5-star feedback and on-time international delivery.',
+    description: 'Delivering end-to-end bespoke solutions with verified 100% 5-star client satisfaction and on-time delivery.',
     image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800',
-    deliverables: ['Fiverr 5.0★ Rating', 'On-Time Delivery', 'Full-Stack Deployment']
+    deliverables: ['5.0★ Client Rating', 'On-Time Delivery', 'Full-Stack Deployment']
   }
 ];
 
@@ -240,11 +229,11 @@ export const AYUSH_JOURNEY: JourneyMilestone[] = [
   {
     year: '2026 — Present',
     role: 'Full-Stack Developer & Freelance Creator',
-    company: 'Fiverr 5.0★ Seller & Independent Delivery',
+    company: 'Independent Client Delivery & Contracts',
     tags: ['Bespoke Web Dev', 'Client Solutions', '5.0★ Rating'],
     description: 'Delivering end-to-end full-stack web applications, luxury e-commerce platforms, and interactive visual websites for international creators and businesses.',
     highlights: [
-      'Maintained 100% 5-star rating on international Fiverr client projects',
+      'Maintained 100% 5-star rating on client projects',
       'Engineered and deployed The Pasha Atelier luxury couture web platform on Vercel',
       'Architected NexStudio Games 3D WebGL interactive studio experience'
     ]
@@ -290,11 +279,11 @@ export const AYUSH_HERO_ROLES = [
   'Creative Web Architect',
   'Video Editor & Motion Designer',
   'UI/UX Digital Craftsman',
-  'Fiverr 5.0★ Seller'
+  'High-Impact Software Engineer'
 ];
 
 export const AYUSH_STATS = [
-  { value: '5.0★', label: 'Client Rating', sub: '100% Satisfied on Fiverr' },
+  { value: '5.0★', label: 'Client Rating', sub: '100% Satisfied' },
   { value: '5+', label: 'Live Deployed Apps', sub: 'On Vercel' },
   { value: '100%', label: 'Delivery Quality', sub: 'Tested & Polished' },
   { value: 'Delhi', label: 'Based In', sub: 'India' }
@@ -309,7 +298,6 @@ export const AYUSH_INFO = {
   email: 'ayusheditor1503@gmail.com',
   phone: '+91 95996 48246',
   location: 'Delhi, India',
-  fiverr: 'https://www.fiverr.com/sellers/ayushthaku_1503/edit',
   portraitImage: portraitImg,
   skillsHologramImage: skillsHologramImg
 };

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, Mail, Phone, MapPin, ExternalLink, Printer } from 'lucide-react';
+import { X, Mail, Phone, MapPin, Printer } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 
 interface ResumeModalProps {
@@ -71,7 +71,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               {PERSONAL_INFO.name}
             </h1>
             <p className="text-base sm:text-lg text-neutral-300 font-light">
-              {PERSONAL_INFO.title} · Freelance Web Developer
+              {PERSONAL_INFO.title} · Web &amp; Software Developer
             </p>
           </div>
 
@@ -88,10 +88,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               <MapPin className="w-3.5 h-3.5 text-neutral-500" />
               <span>{PERSONAL_INFO.location}</span>
             </span>
-            <a href={PERSONAL_INFO.fiverr} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors">
-              <ExternalLink className="w-3.5 h-3.5 text-emerald-500" />
-              <span>Fiverr 5.0★ Seller Profile</span>
-            </a>
           </div>
         </div>
 
@@ -103,7 +99,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           <p className="text-sm text-neutral-300 leading-relaxed font-normal">
             Detail-oriented full-stack software engineer and creative web developer with hands-on production experience in modern
             web applications, responsive user interfaces, and performance-focused architectures (React, Next.js, Three.js, Tailwind CSS).
-            Committed to clean, maintainable code, tactile typography, and 100% 5-star client satisfaction.
+            Committed to clean, maintainable code, tactile typography, and 100% client satisfaction.
           </p>
         </div>
 
@@ -189,7 +185,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           </div>
 
           <div className="text-right">
-            <span className="text-neutral-500 uppercase block">FREELANCE RECORD</span>
+            <span className="text-neutral-500 uppercase block">CLIENT RECORD</span>
             <span className="text-emerald-400 font-medium">100% 5★ Verified Deliveries</span>
           </div>
         </div>
