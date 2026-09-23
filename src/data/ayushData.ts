@@ -1,7 +1,6 @@
 import portraitImg from '../assets/images/ayush_portrait_cinematic_1790130485024.jpg';
 import pashaImg from '../assets/images/project_the_pasha_atelier_1790130497809.jpg';
 import gamesImg from '../assets/images/project_games_studio_1790130515146.jpg';
-import onionImg from '../assets/images/project_onion_grader_ai_1790130527776.jpg';
 import commerceImg from '../assets/images/project_pulse_commerce_1790130540973.jpg';
 import editingBoxImg from '../assets/images/editing_box_preview_1790143319164.jpg';
 import skillsHologramImg from '../assets/images/skills_hologram_core_1790143347930.jpg';
@@ -12,7 +11,7 @@ export interface ProjectItem {
   url: string;
   img: string;
   tag: string;
-  category: 'Web & E-Commerce' | '3D & Interactive' | 'AI & Vision' | 'Creative Studio';
+  category: 'Web & E-Commerce' | '3D & Interactive' | 'Creative Studio';
   desc: string;
   techs: string[];
   featured?: boolean;
@@ -45,18 +44,6 @@ export const AYUSH_PROJECTS: ProjectItem[] = [
     metrics: '60fps Spatial WebGL'
   },
   {
-    id: 'onion-grader-ai',
-    title: 'Onion Grader AI',
-    url: 'https://onion-grader-2-pjdu.vercel.app/',
-    img: onionImg,
-    tag: 'Computer Vision & AI',
-    category: 'AI & Vision',
-    desc: 'Automated agricultural inspection platform using computer vision heuristics to classify crop quality, surface defects, and batch metrics.',
-    techs: ['Python', 'OpenCV', 'React', 'PostgreSQL'],
-    featured: true,
-    metrics: 'Computer Vision Pipeline'
-  },
-  {
     id: 'pulse-commerce',
     title: 'Pulse Commerce Store',
     url: 'https://frontented-e-commerce-website-desig.vercel.app/',
@@ -80,8 +67,8 @@ export const AYUSH_PROJECTS: ProjectItem[] = [
   }
 ];
 
-export const AYUSH_PROJECTS_ROW1 = AYUSH_PROJECTS.slice(0, 3);
-export const AYUSH_PROJECTS_ROW2 = AYUSH_PROJECTS.slice(2, 5);
+export const AYUSH_PROJECTS_ROW1 = AYUSH_PROJECTS.slice(0, 2);
+export const AYUSH_PROJECTS_ROW2 = AYUSH_PROJECTS.slice(2, 4);
 
 export interface ServiceItem {
   id: string;
@@ -127,11 +114,11 @@ export const AYUSH_SERVICES: ServiceItem[] = [
   },
   {
     id: '05',
-    title: 'Computer Vision & AI Systems',
-    category: 'AI & Data',
-    description: 'Integrating Python inspection models, OpenCV defect detection heuristics, and operator telemetry dashboards.',
-    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800',
-    deliverables: ['OpenCV Pipelines', 'Inspection Models', 'Real-Time Telemetry']
+    title: 'Modern API & State Architectures',
+    category: 'Backend & APIs',
+    description: 'Engineering responsive API pipelines, structured JSON contracts, and robust state machines for smooth frontend consumption.',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800',
+    deliverables: ['RESTful APIs', 'JSON Pipelines', 'State Management']
   },
   {
     id: '06',
@@ -193,14 +180,14 @@ export const AYUSH_SKILL_CATEGORIES: SkillCategory[] = [
     ]
   },
   {
-    title: 'Interactive 3D & AI',
+    title: 'Interactive 3D & Creative Tech',
     iconName: 'Brain',
-    description: 'Computer vision defect detection, 3D WebGL viewports, and AI workflow integration.',
+    description: '3D WebGL viewports, spatial choreographies, and modern creative workflows.',
     skills: [
       { name: 'Three.js / WebGL', level: 'Intermediate' },
-      { name: 'OpenCV', level: 'Intermediate' },
+      { name: 'Motion Design', level: 'Advanced' },
       { name: 'Python Scripts', level: 'Advanced' },
-      { name: 'AI Workflows', level: 'Advanced' }
+      { name: 'Creative Tech Workflows', level: 'Advanced' }
     ]
   },
   {
@@ -240,13 +227,13 @@ export const AYUSH_JOURNEY: JourneyMilestone[] = [
   },
   {
     year: '2025 — 2026',
-    role: 'AI Computer Vision & Web Telemetry',
+    role: 'Creative Web Systems & Interactive UI',
     company: 'Applied Project Engineering',
-    tags: ['Computer Vision', 'OpenCV', 'React Dashboard'],
-    description: 'Researched and built automated crop defect detection systems with real-time web telemetry and operator dashboards.',
+    tags: ['Interactive Web', 'UI Engineering', 'React'],
+    description: 'Researched and built high-performance responsive web applications, interactive interfaces, and dynamic telemetry dashboards.',
     highlights: [
-      'Built Onion Grader AI utilizing OpenCV computer vision defect identification',
-      'Designed interactive web dashboard displaying batch quality metrics and analysis'
+      'Engineered interactive telemetry dashboards displaying live batch performance metrics',
+      'Developed high-fidelity data visualization components and state management pipelines'
     ]
   },
   {
@@ -284,7 +271,7 @@ export const AYUSH_HERO_ROLES = [
 
 export const AYUSH_STATS = [
   { value: '5.0★', label: 'Client Rating', sub: '100% Satisfied' },
-  { value: '5+', label: 'Live Deployed Apps', sub: 'On Vercel' },
+  { value: '4+', label: 'Live Deployed Apps', sub: 'On Vercel' },
   { value: '100%', label: 'Delivery Quality', sub: 'Tested & Polished' },
   { value: 'Delhi', label: 'Based In', sub: 'India' }
 ];

@@ -122,9 +122,9 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               </span>
             </div>
             <div className="p-3 grid grid-cols-1 sm:grid-cols-4 gap-2">
-              <span className="text-neutral-500 uppercase">Interactive &amp; AI:</span>
+              <span className="text-neutral-500 uppercase">Interactive &amp; Media:</span>
               <span className="sm:col-span-3 text-neutral-200">
-                Three.js WebGL Viewports, Computer Vision (OpenCV), Video Post-Production &amp; Editing
+                Three.js WebGL Viewports, Motion Design, Video Post-Production &amp; Editing
               </span>
             </div>
             <div className="p-3 grid grid-cols-1 sm:grid-cols-4 gap-2">
@@ -166,12 +166,11 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
             <div className="p-4 border border-white/[0.08]">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs mb-2">
-                <span className="font-bold text-white text-sm">Onion Grader AI (onion-grader-2-pjdu.vercel.app)</span>
-                <span className="font-mono text-neutral-500">Python · OpenCV · React Dashboard</span>
+                <span className="font-bold text-white text-sm">Pulse Commerce Store (frontented-e-commerce-website-desig.vercel.app)</span>
+                <span className="font-mono text-neutral-500">HTML5 · CSS Grid · JavaScript ES6+</span>
               </div>
               <p className="text-xs text-neutral-300 leading-relaxed">
-                Automated agricultural inspection platform utilizing optical defect recognition heuristics with
-                real-time telemetry dashboard.
+                High-conversion modern streetwear apparel marketplace with dynamic category filtering, persistent cart state, and optimized mobile-first checkout flow.
               </p>
             </div>
           </div>

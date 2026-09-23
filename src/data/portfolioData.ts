@@ -4,7 +4,6 @@ import { Project, SkillItem, JourneyMilestone } from '../types/portfolio';
 import portraitImg from '../assets/images/ayush_portrait_cinematic_1790130485024.jpg';
 import pashaImg from '../assets/images/project_the_pasha_atelier_1790130497809.jpg';
 import gamesImg from '../assets/images/project_games_studio_1790130515146.jpg';
-import onionImg from '../assets/images/project_onion_grader_ai_1790130527776.jpg';
 import commerceImg from '../assets/images/project_pulse_commerce_1790130540973.jpg';
 
 export const PERSONAL_INFO = {
@@ -19,7 +18,7 @@ export const PERSONAL_INFO = {
   status: 'Open for Opportunities & High-Impact Contracts',
   stats: [
     { label: 'Client Rating', value: '5.0★' },
-    { label: 'Live Deployed Apps', value: '5+' },
+    { label: 'Live Deployed Apps', value: '4+' },
     { label: 'Delivery Quality', value: '100%' },
     { label: 'Based In', value: 'Delhi, IN' }
   ]
@@ -71,29 +70,6 @@ export const PROJECTS: Project[] = [
     ],
     metrics: '60 FPS stable WebGL rendering across mobile and desktop',
     accentColor: '#38bdf8'
-  },
-  {
-    id: 'onion-grader-ai',
-    title: 'Onion Grader AI',
-    subtitle: 'AI Computer Vision & Agricultural Grading Intelligence',
-    category: 'ai-data',
-    categoryLabel: 'Computer Vision & AI',
-    role: 'Full-Stack AI Integration & UI Architect',
-    year: '2026',
-    description: 'Automated agricultural inspection platform using computer vision heuristics to classify crop quality, surface defects, and batch metrics.',
-    longDescription: 'Bridging industrial hardware with real-time web telemetry. Provides an intuitive operator dashboard displaying live image classification, defect distribution charts, grading thresholds, and exportable batch quality compliance logs.',
-    technologies: ['Python', 'Computer Vision', 'React', 'PostgreSQL', 'REST APIs', 'Tailwind CSS'],
-    liveUrl: 'https://onion-grader-2-pjdu.vercel.app/',
-    githubUrl: '',
-    imageUrl: onionImg,
-    keyFeatures: [
-      'Real-time optical defect classification and size-sorting heuristics',
-      'Operator telemetry dashboard with tabular accuracy metrics',
-      'Batch export in CSV/JSON with automated compliance summaries',
-      'Low-latency REST API communication with camera edge feeds'
-    ],
-    metrics: 'Sub-200ms inference processing · 94% classification precision',
-    accentColor: '#10b981'
   },
   {
     id: 'pulse-commerce',
@@ -226,7 +202,7 @@ export const SKILLS: SkillItem[] = [
     level: 'Advanced',
     experience: '2+ Years',
     iconName: 'Terminal',
-    highlight: 'Backend logic, data handling, and computer vision scripting with OpenCV.'
+    highlight: 'Backend logic, data handling, and automation scripting.'
   },
   {
     name: 'REST APIs',
@@ -267,22 +243,22 @@ export const JOURNEY_MILESTONES: JourneyMilestone[] = [
     organization: 'Independent Client Delivery & Contracts',
     description: 'Delivering end-to-end full-stack web applications, luxury e-commerce platforms, and interactive visual websites for creators and international businesses.',
     achievements: [
-      'Designed and deployed The Pasha Atelier, NexStudio Games, and Onion Grader AI',
+      'Designed and deployed The Pasha Atelier, NexStudio Games, and Pulse Commerce Store',
       'Maintained 100% 5-star client ratings across web development and template deliverables'
     ],
-    technologies: ['React', 'Next.js', 'Tailwind CSS', 'Three.js', 'PostgreSQL']
+    technologies: ['React', 'Next.js', 'Tailwind CSS', 'Three.js']
   },
   {
     year: '2025 — 2026',
-    role: 'AI Computer Vision & Web Telemetry',
-    title: 'Computer Vision & Web Systems',
+    role: 'Creative Web Systems & Interactive UI',
+    title: 'Interactive Web Systems',
     organization: 'Applied Project Engineering',
-    description: 'Developed automated agricultural inspection algorithms and deep exploratory data analysis studies uncovering business-critical patterns.',
+    description: 'Researched and built high-performance responsive web applications, interactive interfaces, and dynamic state engines.',
     achievements: [
-      'Built Onion Grader AI utilizing optical defect recognition models and operator dashboard telemetry',
-      'Engineered interactive telemetry dashboard for real-time defect analysis'
+      'Engineered interactive user interfaces displaying live performance telemetry and responsive state trees',
+      'Developed high-fidelity data visualization components and client-side application logic'
     ],
-    technologies: ['Python', 'OpenCV', 'React', 'Tailwind CSS']
+    technologies: ['React', 'Tailwind CSS', 'JavaScript ES6+', 'State Management']
   },
   {
     year: '2024 — 2025',

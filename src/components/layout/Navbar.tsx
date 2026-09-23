@@ -75,13 +75,6 @@ export const Navbar: React.FC = () => {
               {link.name}
             </a>
           ))}
-          <a
-            href="#contact"
-            onClick={(e) => handleNavClick(e, '#contact')}
-            className="ml-4 px-6 py-2.5 text-sm font-medium bg-white text-black rounded-full hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] cursor-pointer"
-          >
-            Let's Talk
-          </a>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -100,25 +93,18 @@ export const Navbar: React.FC = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="absolute top-24 left-4 right-4 z-[60] glass rounded-2xl p-6 flex flex-col gap-6 md:hidden shadow-2xl border border-white/10"
+          className="absolute top-24 left-4 right-4 z-[60] glass rounded-2xl p-6 flex flex-col gap-5 md:hidden shadow-2xl border border-white/10"
         >
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-lg font-medium text-gray-200 hover:text-white transition-colors"
+              className="text-base font-medium text-gray-200 hover:text-white transition-colors py-1"
             >
               {link.name}
             </a>
           ))}
-          <a
-            href="#contact"
-            onClick={(e) => handleNavClick(e, '#contact')}
-            className="w-full text-center py-3 text-sm font-medium bg-white text-black rounded-full shadow-lg"
-          >
-            Let's Talk
-          </a>
         </motion.div>
       )}
     </motion.nav>

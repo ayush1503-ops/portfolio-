@@ -7,7 +7,6 @@ const categories = [
   'All',
   'Web & E-Commerce',
   '3D & Interactive',
-  'AI & Vision',
   'Creative Studio'
 ] as const;
 
@@ -136,7 +135,7 @@ export const ProjectsSection: React.FC = () => {
             </h2>
           </div>
           <p className="text-sm md:text-base text-gray-400 font-light max-w-md leading-relaxed">
-            Real production applications, bespoke digital couture, interactive 3D WebGL experiences, and computer vision systems with live deployments.
+            Real production applications, bespoke digital couture, interactive 3D WebGL experiences, and creative post-production studios with live deployments.
           </p>
         </div>
 
